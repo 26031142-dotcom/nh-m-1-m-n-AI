@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tác Động Truyền Thông - Báo Cáo Khoa Học Chuyên Sâu</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        ocean: {
+                            50: '#f0f9ff', 100: '#e0f2fe', 200: '#bae6fd', 300: '#7dd3fc',
+                            400: '#38bdf8', 500: '#0ea5e9', 600: '#0284c7', 700: '#0369a1',
+                            800: '#075985', 900: '#0c4a6e', 950: '#082f49',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        serif: ['Merriweather', 'serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Merriweather:ital,wght@0,300;0,400;0,700;1,300&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; background-color: #020617; color: #cbd5e1; }
+        
+        /* Typography khoa học */
+        .content-body p { margin-bottom: 1.5rem; line-height: 1.85; font-family: 'Merriweather', serif; font-size: 1.1rem; color: #94a3b8; text-align: justify; }
+        .content-body p strong { color: #e2e8f0; font-weight: 700; }
+        
+        /* Tiêu đề các cấp */
+        .content-body h2 { font-size: 2rem; font-weight: 700; margin-top: 4rem; margin-bottom: 2rem; color: #f8fafc; padding-bottom: 0.75rem; border-bottom: 1px solid rgba(14, 165, 233, 0.3); display: flex; align-items: center; gap: 1rem; }
+        .content-body h3 { font-size: 1.4rem; font-weight: 600; margin-top: 2.5rem; margin-bottom: 1.25rem; color: #38bdf8; font-family: 'Inter', sans-serif; }
+        .content-body h4 { font-size: 1.15rem; font-weight: 600; margin-top: 1.75rem; margin-bottom: 1rem; color: #7dd3fc; font-family: 'Inter', sans-serif; }
+        
+        /* Định dạng Hình ảnh khoa học */
+        figure { margin: 2.5rem 0; border: 1px solid rgba(14, 165, 233, 0.2); border-radius: 0.75rem; overflow: hidden; background: #0f172a; padding: 0.5rem; }
+        figure img { width: 100%; height: auto; border-radius: 0.5rem; object-fit: cover; max-height: 450px; }
+        figcaption { padding: 1rem; text-align: center; font-size: 0.9rem; font-family: 'Inter', sans-serif; color: #64748b; font-style: italic; border-top: 1px solid rgba(255,255,255,0.05); margin-top: 0.5rem; }
+        figcaption strong { color: #38bdf8; font-weight: 600; font-style: normal; }
+
+        /* Progress Bar */
+        #progress-bar { position: fixed; top: 0; left: 0; height: 3px; background: linear-gradient(90deg, #0ea5e9, #38bdf8); width: 0%; z-index: 100; box-shadow: 0 0 15px #0ea5e9; }
+
+        /* Floating TOC (Mục lục bên phải) */
+        .toc-link { position: relative; padding: 0.5rem 1rem 0.5rem 1.5rem; color: #64748b; font-size: 0.9rem; transition: all 0.3s; display: block; border-right: 2px solid transparent; }
+        .toc-link:hover { color: #bae6fd; background: rgba(14, 165, 233, 0.05); }
+        .toc-link.active { color: #38bdf8; font-weight: 600; border-right-color: #38bdf8; background: linear-gradient(90deg, transparent, rgba(14, 165, 233, 0.1)); }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #020617; }
+        ::-webkit-scrollbar-thumb { background: #0c4a6e; border-radius: 4px; }
+        ::-webkit-scrollbar-thumb:hover { background: #0ea5e9; }
+
+        /* CSS MỚI: Hiệu ứng Fade Load */
+        .fade-element {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+        }
+        .fade-element.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="relative">
+
+    <!-- Progress Bar -->
+    <div id="progress-bar"></div>
+
+    <!-- Header Glassmorphism -->
+    <header class="fixed w-full bg-[#020617]/70 backdrop-blur-xl shadow-md z-50 border-b border-white/5">
+        <div class="w-full px-6 lg:px-12 h-16 flex items-center justify-between">
+            <div class="flex items-center gap-3 font-bold text-lg text-white tracking-wide uppercase">
+                <div class="w-8 h-8 rounded bg-gradient-to-br from-ocean-500 to-ocean-800 flex items-center justify-center shadow-lg shadow-ocean-500/20">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"></path></svg>
+                </div>
+                <span>Nhóm 1</span>
+            </div>
+            <div class="text-sm text-ocean-400 font-mono hidden md:block"></div>
+        </div>
+    </header>
+
+    <!-- Floating TOC (Góc phải màn hình) -->
+    <aside class="hidden xl:block fixed top-24 right-8 w-72 bg-[#0f172a]/80 backdrop-blur-lg border border-ocean-900/50 rounded-2xl shadow-2xl z-40 overflow-hidden">
+        <div class="bg-gradient-to-r from-ocean-950 to-transparent p-4 border-b border-ocean-900/50 flex items-center gap-2">
+            <svg class="w-5 h-5 text-ocean-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            <h3 class="font-bold text-sm uppercase tracking-widest text-ocean-100 m-0">Mục lục</h3>
+        </div>
+        <nav class="flex flex-col py-2" id="toc">
+            <a href="#mo-dau" class="toc-link">1. Mở đầu & Lý do</a>
+            <a href="#chuong-1" class="toc-link">2. Chương 1: Cơ sở lý luận</a>
+            <a href="#chuong-2" class="toc-link">3. Chương 2: Tác động truyền thông</a>
+            <a href="#chuong-3" class="toc-link">4. Chương 3: Ứng dụng Prompting</a>
+            <a href="#ket-luan" class="toc-link">5. Kết luận tổng quan</a>
+        </nav>
+    </aside>
+
+    <!-- Hero Section -->
+    <div class="relative w-full h-[60vh] flex items-center justify-center mt-16 overflow-hidden">
+        <div class="absolute inset-0">
+            <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=1920&auto=format&fit=crop" alt="Global Network" class="w-full h-full object-cover" />
+            <div class="absolute inset-0 bg-gradient-to-b from-[#020617]/90 via-[#020617]/80 to-[#020617]"></div>
+        </div>
+        
+        <div class="relative z-10 w-full max-w-5xl px-6 text-center fade-element">
+            <span class="inline-block py-1.5 px-4 rounded-full bg-ocean-500/10 border border-ocean-500/30 text-ocean-300 text-sm font-semibold tracking-widest uppercase mb-6 backdrop-blur-md">
+                Báo Cáo Nghiên Cứu Xã Hội Học
+            </span>
+            <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-6 font-serif text-white drop-shadow-lg">
+                Tác Động Của Truyền Thông Đại Chúng Đến Nhận Thức Giới Trẻ
+            </h1>
+            <p class="text-xl text-slate-300 font-light max-w-3xl mx-auto mb-8">
+                Nghiên cứu ứng dụng kỹ thuật Prompting Trí Tuệ Nhân Tạo để phân tích dữ liệu trong Kỷ nguyên số.
+            </p>
+            <div class="flex items-center justify-center gap-6 text-sm font-mono text-slate-400">
+                <span><strong class="text-white">Tác giả:</strong> Nhóm 1 </span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Area -->
+    <main class="w-full xl:pr-[350px] px-6 lg:px-12 py-12">
+        <div class="max-w-4xl mx-auto content-body bg-[#060b19] p-8 md:p-12 rounded-3xl border border-white/5 shadow-2xl relative">
+
+            <!-- Abstract -->
+            <div class="bg-ocean-950/40 border border-ocean-800/50 rounded-2xl p-6 md:p-8 mb-12 fade-element">
+                <h3 class="!mt-0 !mb-4 text-white font-sans text-xl">Tóm tắt (Abstract)</h3>
+                <p class="!mb-0 text-sm !leading-relaxed">Nghiên cứu này xem xét các tác động đa chiều của hệ sinh thái truyền thông số lên quá trình nhận thức của nhóm người trẻ tuổi (18-25). Bằng việc ứng dụng các kỹ thuật prompting (Zero-shot, Role, Context), nghiên cứu phân tích hàng triệu điểm dữ liệu văn bản để chỉ ra sự dịch chuyển từ tiếp nhận bị động sang tương tác chủ động, đồng thời cảnh báo về hiệu ứng "phòng vang" và áp lực tâm lý (FOMO).</p>
+            </div>
+            
+            <section id="mo-dau" class="section fade-element">
+                <h2 class="!mt-0">
+                    <span class="bg-ocean-900/50 p-2 rounded-lg mr-2"><svg class="w-7 h-7 text-ocean-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></span>
+                    1. Phần Mở Đầu
+                </h2>
+                <p>Sự bùng nổ của truyền thông số đã tạo nên một cuộc chuyển dịch căn bản trong phương thức vận hành của xã hội hiện đại. Với sự hỗ trợ của hạ tầng internet và thiết bị di động thông minh, truyền thông đại chúng không còn đơn thuần là kênh cung cấp tin tức một chiều mà đã trở thành một hệ sinh thái tương tác đa chiều. Vai trò của nó mở rộng từ việc phổ biến tri thức đến việc định hình các chuẩn mực văn hóa và điều tiết dư luận xã hội.</p>
+                <p>Mục tiêu tổng quát của nghiên cứu là phân tích hệ thống các tác động đa chiều từ truyền thông đại chúng đến quá trình hình thành nhận thức của giới trẻ trong kỷ nguyên số. Đồng thời, đề tài đề xuất giải pháp ứng dụng trí tuệ nhân tạo và kỹ thuật prompting nhằm tối ưu hóa quy trình xử lý và kiểm chứng thông tin.</p>
+                
+                <figure>
+                    <img src="https://images.unsplash.com/photo-1526498460520-4c246339dccb?q=80&w=1200&auto=format&fit=crop" alt="Giới trẻ và thiết bị di động">
+                    <figcaption><strong>Figure 1:</strong> Sự gắn kết của giới trẻ với các thiết bị di động và luồng thông tin liên tục định hình lại tư duy xã hội.</figcaption>
+                </figure>
+
+                <h3>1.1. Phương pháp nghiên cứu</h3>
+                <div class="grid md:grid-cols-2 gap-6 mt-6">
+                    <div class="bg-[#0f172a]/50 p-6 rounded-xl border border-white/5 hover:border-ocean-700 transition">
+                        <h4 class="!mt-0">Phân tích lý thuyết</h4>
+                        <p class="text-sm !mb-0 text-slate-400 text-justify">Áp dụng để hệ thống hóa các khái niệm về truyền thông số và nhận thức. Nghiên cứu tiến hành phân tách, liên kết các luồng tư tưởng hiện hữu nhằm xây dựng khung lý thuyết vững chắc.</p>
+                    </div>
+                    <div class="bg-[#0f172a]/50 p-6 rounded-xl border border-white/5 hover:border-ocean-700 transition">
+                        <h4 class="!mt-0">Thực nghiệm (Prompting)</h4>
+                        <p class="text-sm !mb-0 text-slate-400 text-justify">Ứng dụng trên các mô hình ngôn ngữ lớn (LLMs) nhằm mô phỏng và phân tích khối lượng dữ liệu khổng lồ. Thiết lập chuỗi lệnh có cấu trúc để trích xuất xu hướng nhận thức.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="chuong-1" class="section fade-element">
+                <h2>
+                    <span class="bg-ocean-900/50 p-2 rounded-lg mr-2"><svg class="w-7 h-7 text-ocean-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path></svg></span>
+                    Chương 1. Cơ Sở Lý Luận
+                </h2>
+                <h3>Sự chuyển dịch và đặc điểm tiếp nhận</h3>
+                <p>Sự chuyển dịch từ truyền thông truyền thống sang truyền thông số đánh dấu bước ngoặt lớn trong phương thức tương tác xã hội. Thay vì tiếp nhận thụ động, giới trẻ hiện nay ưu tiên các nền tảng có tính tương tác cao. Quá trình này biến người dùng từ chủ thể tiêu thụ thành những người cùng sáng tạo nội dung (co-creators).</p>
+                
+                <div class="my-8 space-y-6">
+                    <div class="flex flex-col md:flex-row gap-4 items-start bg-slate-900/50 p-6 rounded-xl border-l-4 border-ocean-500">
+                        <div class="flex-shrink-0 text-ocean-400 font-mono text-xl font-bold">01</div>
+                        <div>
+                            <h4 class="!mt-0 !mb-2">Tốc độ & Trực quan</h4>
+                            <p class="text-sm !mb-0 text-slate-400">Giới trẻ ưu tiên định dạng video ngắn, infographic nhằm tối ưu hóa tốc độ tiếp nhận, thay thế dần các văn bản học thuật dài dòng.</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col md:flex-row gap-4 items-start bg-slate-900/50 p-6 rounded-xl border-l-4 border-ocean-600">
+                        <div class="flex-shrink-0 text-ocean-400 font-mono text-xl font-bold">02</div>
+                        <div>
+                            <h4 class="!mt-0 !mb-2">Trạng thái Always-On</h4>
+                            <p class="text-sm !mb-0 text-slate-400">Sự lệ thuộc vào thiết bị di động hình thành thói quen phản xạ tức thì, liên tục trực tuyến 24/7 <strong>(Kemp, 2024)</strong>.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="chuong-2" class="section fade-element">
+                <h2>
+                    <span class="bg-ocean-900/50 p-2 rounded-lg mr-2"><svg class="w-7 h-7 text-ocean-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 12l3-3 3 3 4-4M8 21l4-4 4 4M3 4h18M4 4h16v12a1 1 0 01-1 1H5a1 1 0 01-1-1V4z"></path></svg></span>
+                    Chương 2. Phân Tích Tác Động Truyền Thông
+                </h2>
+                
+                <figure>
+                    <img src="https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1200&auto=format&fit=crop" alt="Mạng xã hội và ma trận thông tin">
+                    <figcaption><strong>Figure 2:</strong> Ma trận thông tin trên các nền tảng mạng xã hội vừa mang lại cơ hội kết nối vừa tiềm ẩn rủi ro tâm lý.</figcaption>
+                </figure>
+
+                <div class="grid lg:grid-cols-2 gap-8">
+                    <div class="bg-gradient-to-b from-ocean-950/30 to-transparent border border-cyan-900/50 p-8 rounded-2xl">
+                        <div class="flex items-center gap-3 mb-6 pb-4 border-b border-cyan-900/50">
+                            <svg class="w-8 h-8 text-cyan-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
+                            <h3 class="!mt-0 !mb-0 text-cyan-300">Tác động tích cực</h3>
+                        </div>
+                        <h4 class="text-cyan-400 !mt-0">Mở rộng kiến thức toàn cầu</h4>
+                        <p class="text-sm text-slate-400">Đóng vai trò cửa ngõ giúp giới trẻ tiếp cận tri thức quốc tế, nâng cao năng lực hội nhập và ý thức công dân toàn cầu.</p>
+                        
+                        <h4 class="text-cyan-400">Thúc đẩy tham gia cộng đồng</h4>
+                        <p class="text-sm text-slate-400 !mb-0">Là chất xúc tác quan trọng cho các phong trào xã hội, gây quỹ và các chiến dịch nâng cao nhận thức bảo vệ môi trường, nhân quyền.</p>
+                    </div>
+
+                    <div class="bg-gradient-to-b from-slate-900/50 to-transparent border border-slate-700/50 p-8 rounded-2xl">
+                        <div class="flex items-center gap-3 mb-6 pb-4 border-b border-slate-700/50">
+                            <svg class="w-8 h-8 text-rose-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"></path></svg>
+                            <h3 class="!mt-0 !mb-0 text-rose-300">Rủi ro & Hệ lụy</h3>
+                        </div>
+                        <h4 class="text-slate-300 !mt-0">Lệch lạc chuẩn mực & FOMO</h4>
+                        <p class="text-sm text-slate-400">So sánh xã hội tiêu cực dẫn đến áp lực phi thực tế, hội chứng sợ bị bỏ lỡ (FOMO) gây lo âu, trầm cảm <strong>(Fardouly, 2016)</strong>.</p>
+                        
+                        <h4 class="text-slate-300">Đại dịch "Tin giả" (Fake News)</h4>
+                        <p class="text-sm text-slate-400 !mb-0">Thông tin độc hại, thuật toán buồng vang (Echo Chamber) làm xói mòn tư duy phản biện khách quan <strong>(Lazer et al., 2018)</strong>.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="chuong-3" class="section fade-element">
+                <h2>
+                    <span class="bg-ocean-900/50 p-2 rounded-lg mr-2"><svg class="w-7 h-7 text-ocean-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg></span>
+                    Chương 3. Ứng Dụng Kỹ Thuật Prompting (AI)
+                </h2>
+                <p>Nghiên cứu ứng dụng Trí tuệ nhân tạo (AI) như một phương pháp thu thập và phân tích định tính quy mô lớn. Bằng việc tinh chỉnh các câu lệnh (prompts), mô hình ngôn ngữ lớn trở thành công cụ phác họa mô hình nhận thức.</p>
+
+                <figure>
+                    <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1200&auto=format&fit=crop" alt="Trí tuệ nhân tạo và xử lý dữ liệu">
+                    <figcaption><strong>Figure 3:</strong> Mô phỏng kiến trúc mạng neural - Nền tảng của các mô hình ngôn ngữ lớn phân tích dữ liệu văn bản.</figcaption>
+                </figure>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+                    <div class="bg-gradient-to-br from-[#0c4a6e] to-[#020617] p-6 rounded-xl border border-ocean-700/50 relative overflow-hidden group">
+                        <div class="absolute -right-6 -top-6 w-24 h-24 bg-ocean-500/10 rounded-full blur-xl group-hover:bg-ocean-500/30 transition-all"></div>
+                        <h4 class="!mt-0 text-white flex items-center gap-2">
+                            <span class="text-ocean-400 font-mono">01.</span> Zero-shot
+                        </h4>
+                        <p class="text-sm !mb-0 text-slate-400">Yêu cầu AI đưa ra câu trả lời trực tiếp nhằm khai thác tri thức tiền huấn luyện cơ bản nhất mà không chịu ảnh hưởng của bối cảnh thiên kiến.</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-[#0c4a6e] to-[#020617] p-6 rounded-xl border border-ocean-700/50 relative overflow-hidden group">
+                        <div class="absolute -right-6 -top-6 w-24 h-24 bg-ocean-500/10 rounded-full blur-xl group-hover:bg-ocean-500/30 transition-all"></div>
+                        <h4 class="!mt-0 text-white flex items-center gap-2">
+                            <span class="text-ocean-400 font-mono">02.</span> Role Play
+                        </h4>
+                        <p class="text-sm !mb-0 text-slate-400">Gán vai chuyên gia (nhà xã hội học, tâm lý học) để AI tối ưu hóa góc nhìn đa chiều, biện giải các phản ứng tâm lý học phức tạp.</p>
+                    </div>
+                    <div class="bg-gradient-to-br from-[#0c4a6e] to-[#020617] p-6 rounded-xl border border-ocean-700/50 relative overflow-hidden group">
+                        <div class="absolute -right-6 -top-6 w-24 h-24 bg-ocean-500/10 rounded-full blur-xl group-hover:bg-ocean-500/30 transition-all"></div>
+                        <h4 class="!mt-0 text-white flex items-center gap-2">
+                            <span class="text-ocean-400 font-mono">03.</span> Context
+                        </h4>
+                        <p class="text-sm !mb-0 text-slate-400">Cung cấp tập dữ liệu đầu vào cụ thể (thông số mạng xã hội VN) giúp AI đưa ra phân tích sát với thực tiễn bản địa và có độ sâu phân tích cao.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section id="ket-luan" class="section fade-element">
+                <h2>
+                    <span class="bg-ocean-900/50 p-2 rounded-lg mr-2"><svg class="w-7 h-7 text-ocean-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></span>
+                    Kết luận
+                </h2>
+                <div class="bg-gradient-to-r from-ocean-900/30 to-transparent p-6 rounded-xl border-l-4 border-ocean-500">
+                    <p class="!mb-0">Truyền thông đại chúng đóng vai trò then chốt trong việc tái định hình nhận thức giới trẻ qua cơ chế thiết lập chương trình nghị sự và đóng khung thông tin. Đặc biệt, việc kết hợp Structured Prompting trong nghiên cứu dữ liệu lớn đóng vai trò then chốt trong việc hệ thống hóa thông tin, giúp nghiên cứu xã hội học trong tương lai có thể đo lường định tính chính xác hơn <strong>(White et al., 2023)</strong>. Xây dựng "sức đề kháng số" và tư duy phản biện cho người trẻ là giải pháp cốt lõi định hình tương lai.</p>
+                </div>
+            </section>
+        </div>
+
+        <div class="max-w-4xl mx-auto mt-12 fade-element">
+            <h2 class="text-2xl font-bold text-white mb-8 flex items-center gap-3 border-b border-white/10 pb-4">
+                <span class="bg-ocean-900/50 p-2.5 rounded-lg text-ocean-400">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"></path></svg>
+                </span>
+                Thành viên nhóm số 1
+            </h2>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                <!-- Thành viên 1 -->
+                <div class="aspect-square border border-white/20 rounded-2xl bg-white/5 flex flex-col items-center justify-center p-4 text-center hover:bg-white/10 hover:border-white/40 transition-all duration-300 shadow-lg shadow-black/20">
+                    <div class="w-12 h-12 rounded-full bg-ocean-900/50 flex items-center justify-center mb-4 text-ocean-400 border border-ocean-500/30">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                    </div>
+                    <div class="font-bold text-white text-[15px] mb-1">Nguyễn Thị Hải An</div>
+                    <div class="text-ocean-400 font-mono text-sm">26031141</div>
+                </div>
+
+                <!-- Thành viên 2 (Lập trình web) -->
+                <div class="aspect-square border border-white/20 rounded-2xl bg-white/5 flex flex-col items-center justify-center p-4 text-center hover:bg-white/10 hover:border-white/40 transition-all duration-300 shadow-lg shadow-black/20">
+                    <div class="w-12 h-12 rounded-full bg-ocean-900/50 flex items-center justify-center mb-3 text-ocean-400 border border-ocean-500/30">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"></path></svg>
+                    </div>
+                    <div class="font-bold text-white text-[15px] mb-1">Bùi Quang Anh</div>
+                    <div class="text-ocean-400 font-mono text-sm mb-2">26031142</div>
+                    <div class="text-[10px] uppercase tracking-wider text-slate-300 bg-black/40 px-2 py-1 rounded-full border border-white/10">Người lập trình web</div>
+                </div>
+
+                <!-- Thành viên 3 -->
+                <div class="aspect-square border border-white/20 rounded-2xl bg-white/5 flex flex-col items-center justify-center p-4 text-center hover:bg-white/10 hover:border-white/40 transition-all duration-300 shadow-lg shadow-black/20">
+                    <div class="w-12 h-12 rounded-full bg-ocean-900/50 flex items-center justify-center mb-4 text-ocean-400 border border-ocean-500/30">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                    </div>
+                    <div class="font-bold text-white text-[15px] mb-1">Dương Diệu Anh</div>
+                    <div class="text-ocean-400 font-mono text-sm">26031144</div>
+                </div>
+
+                <!-- Thành viên 4 -->
+                <div class="aspect-square border border-white/20 rounded-2xl bg-white/5 flex flex-col items-center justify-center p-4 text-center hover:bg-white/10 hover:border-white/40 transition-all duration-300 shadow-lg shadow-black/20">
+                    <div class="w-12 h-12 rounded-full bg-ocean-900/50 flex items-center justify-center mb-4 text-ocean-400 border border-ocean-500/30">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path></svg>
+                    </div>
+                    <div class="font-bold text-white text-[15px] mb-1">Đặng Thị Quỳnh Anh</div>
+                    <div class="text-ocean-400 font-mono text-sm">26031143</div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-[#040812] border-t border-white/5 py-12 text-center fade-element">
+        <div class="text-slate-500 text-sm font-medium">
+            @2026-Nhóm 1
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script>
+        // 1. Reading Progress Bar (Giữ nguyên)
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById("progress-bar").style.width = scrolled + "%";
+        });
+
+        // 2. ScrollSpy for Floating TOC (Giữ nguyên)
+        const sections = document.querySelectorAll("section.section");
+        const navLinks = document.querySelectorAll(".toc-link");
+
+        window.addEventListener("scroll", () => {
+            let current = "";
+            sections.forEach((section) => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= (sectionTop - 300)) {
+                    current = section.getAttribute("id");
+                }
+            });
+
+            navLinks.forEach((link) => {
+                link.classList.remove("active");
+                if (link.getAttribute("href").includes(current)) {
+                    link.classList.add("active");
+                }
+            });
+        });
+
+        // 3. SCRIPT MỚI: Xử lý hiệu ứng Fade Load (Intersection Observer)
+        document.addEventListener("DOMContentLoaded", () => {
+            const fadeElements = document.querySelectorAll('.fade-element');
+            
+            const fadeObserver = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        // Thêm class is-visible khi cuộn tới
+                        entry.target.classList.add('is-visible');
+                        // Nếu muốn hiệu ứng chỉ chạy 1 lần thì bỏ comment dòng dưới
+                        // observer.unobserve(entry.target);
+                    } else {
+                        // Xóa class is-visible khi cuộn qua (để có thể lặp lại hiệu ứng)
+                        entry.target.classList.remove('is-visible');
+                    }
+                });
+            }, {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.15 // Kích hoạt khi hiện 15% diện tích element
+            });
+
+            fadeElements.forEach(el => fadeObserver.observe(el));
+        });
+    </script>
+</body>
+</html>
